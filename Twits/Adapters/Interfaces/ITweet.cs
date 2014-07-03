@@ -13,5 +13,7 @@ namespace Twits.Adapters.Interfaces
 
         List<TweetVM> GetPersonTweets(int personId);
 
+        void DeleteTweet(int deleterId, int tweetId);
+
     }
 }

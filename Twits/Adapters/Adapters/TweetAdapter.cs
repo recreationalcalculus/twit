@@ -15,7 +15,7 @@ namespace Twits.Adapters.Adapters
         public TweetVM GetTweet(int tweetId)
         {
             TwitDbContext db = new TwitDbContext();
-            return db.Tweets.Where(t => t.TweetId == tweetId).Select(t => new TweetVM{
+            return db.Tweets.Where(t => t.TweetId == tweetId && t.Visible).Select(t => new TweetVM{
             Id = t.TweetId,
             Timestamp = t.Timestamp,
             Body = t.Body,
@@ -31,6 +31,17 @@ namespace Twits.Adapters.Adapters
             Person person = db.People.Where(p => p.PersonId == personId).FirstOrDefault();
             List<TweetVM> tweets = person.Tweets.Select(t => GetTweet(t.TweetId)).ToList();
             return tweets;
+        }
+        
+        public void DeleteTweet(int deleterId, int tweetId)
+        {
+            TwitDbContext db = new TwitDbContext();
+            Tweet tweet = db.Tweets.Where(t => t.TweetId == tweetId).FirstOrDefault();
+            int authorId = tweet.Twit.PersonId;
+            if (tweet != null && deleterId == authorId)
+            {
+                tweet.Visible = false;
+            }
         }
     }
 }
