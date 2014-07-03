@@ -43,5 +43,13 @@ namespace Twits.Adapters.Adapters
                 tweet.Visible = false;
             }
         }
+
+
+        public int CreateTweet(int posterId, string body)
+        {
+            TwitDbContext db = new TwitDbContext();
+            db.Tweets.Add(new Tweet(body, posterId));
+            return db.Tweets.Where(t => t.Body == body).Last().TweetId;
+        }
     }
 }

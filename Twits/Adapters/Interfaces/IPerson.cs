@@ -11,7 +11,7 @@ namespace Twits.Adapters.Interfaces
     {
         PersonVM GetPerson(int id);
         List<PersonVM> GetPeople();
-
         List<PersonVM> GetFollowers(int id);
+
     }
 }

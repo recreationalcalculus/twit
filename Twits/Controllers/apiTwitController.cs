@@ -15,9 +15,11 @@ namespace Twits.Controllers
     public class apiTwitController : ApiController
     {
         private IPerson _personAdapter;
+        private ITweet _tweetAdapter;
         public apiTwitController()
         {
             _personAdapter = new PersonAdapter();
+            _tweetAdapter = new TweetAdapter();
         }
         public IHttpActionResult Get(int id = -1)
         {
@@ -38,6 +40,12 @@ namespace Twits.Controllers
                 }
             }
 
+        }
+
+        public IHttpActionResult Post(string body, int id)
+        {
+            int tweetId = _tweetAdapter.CreateTweet(id, body);
+            return Ok(tweetId);
         }
     }
 }
