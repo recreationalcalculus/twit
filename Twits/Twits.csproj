@@ -214,6 +214,7 @@
     <Content Include="TwitApp\error404.html" />
     <Content Include="TwitApp\images\404.jpg" />
     <Content Include="TwitApp\Index.html" />
+    <Content Include="TwitApp\scripts\index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
