@@ -1,9 +1,50 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="Twit">
 <head>
-    <title></title>
+    <title>Chirp! Chirp!</title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    This is the Index.
+    <div class="row">
+        <div class="col-md-3" id="left">
+            <div id="login-or-post-tweet" ng-controller="LoginTweet">
+                <div id="login" ng-hide="loggedIn" class="container">
+                    <div class="well">
+                        <p>Register new account:</p>
+                        <input type="text" class="form-control" ng-model="regName" placeholder="Name" />
+                        <input type="button" class="btn btn-info form-control wide" ng-click="Register()" value="Register" />
+                        {{regName}}
+                        <br /><br />
+                        <p>Or log in:</p>
+                        <input type="text" ng-model="logName" placeholder="Name" class="form-control" />
+                        <input type="text" ng-model="logNumber" placeholder="ID #" class="form-control" />
+                        <input type="button" class="btn btn-success form-control wide" ng-click="Login()" value="Log In" />
+                    </div>
+                </div>
+                <div id="tweet" ng-show="loggedIn" class="container">
+                    <div class="well">
+                        <p>Posting As: {{user}}</p>
+                        <textarea id="tweetText" class="form-control" ng-model="tweet" rows="3" cols="20" placeholder="Tweet! Tweet!"></textarea>
+                        <input type="button" class="btn btn-success form-control" ng-click="Tweet()" value="Post" />
+                    </div>
+                </div>
+            </div>
+            <div id="following-box"></div>
+        </div>
+        <div class="col-md-6" id="center" ng-view>
+
+        </div>
+        <div class="col-md-3" ng-controller="People">
+
+        </div>
+    </div>
+
+    <script src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-route.min.js"></script>
+    <script src="../Scripts/angular-resource.min.js"></script>
+    <script src="scripts/index.js"></script>
 </body>
 </html>
