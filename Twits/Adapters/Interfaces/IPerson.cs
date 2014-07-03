@@ -12,6 +12,8 @@ namespace Twits.Adapters.Interfaces
         PersonVM GetPerson(int id);
         List<PersonVM> GetPeople();
         List<PersonVM> GetFollowers(int id);
+        int CreatePerson(string name, string aboutMe, string imgUrl, bool isUser);
+        int SetUser(int personId);
 
     }
 }

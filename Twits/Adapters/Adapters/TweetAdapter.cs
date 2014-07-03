@@ -42,6 +42,7 @@ namespace Twits.Adapters.Adapters
             {
                 tweet.Visible = false;
             }
+            db.SaveChanges();
         }
 
 
@@ -49,6 +50,7 @@ namespace Twits.Adapters.Adapters
         {
             TwitDbContext db = new TwitDbContext();
             db.Tweets.Add(new Tweet(body, posterId));
+            db.SaveChanges();
             return db.Tweets.Where(t => t.Body == body).Last().TweetId;
         }
     }

@@ -45,13 +45,48 @@ namespace Twits.Adapters.Adapters
             List<int> Ids = db.People.Select(p => p.PersonId).ToList();
             return Ids.Select(i => GetPerson(i)).ToList();
         }
-        
+
         public List<PersonVM> GetFollowers(int id)
         {
             TwitDbContext db = new TwitDbContext();
             List<int> followerIds = db.Follows.Where(f => f.FolloweeId == id).Select(p => p.FollowerId).ToList();
             List<PersonVM> followers = followerIds.Select(f => GetPerson(f)).ToList();
             return followers;
+        }
+
+
+        public int CreatePerson(string name, string aboutMe, string imgUrl, bool isUser)
+        {
+            Person person = new Person(name, aboutMe, imgUrl, isUser);
+            TwitDbContext db = new TwitDbContext();
+            //check to see if someone else is the user
+            if (isUser)
+            {
+                List<Person> currentUsers = db.People.Where(p => p.IsUser).ToList();
+                foreach (var p in currentUsers)
+                {
+                    p.IsUser = false;
+                }
+            }
+            db.People.Add(person);
+            db.SaveChanges();
+            return db.People.Last().PersonId;
+
+        }
+
+        public int SetUser(int personId)
+        {
+            TwitDbContext db = new TwitDbContext();
+            //check to see if anyone else is a user
+            List<Person> currentUsers = db.People.Where(p => p.IsUser).ToList();
+            foreach (var p in currentUsers)
+            {
+                p.IsUser = false;
+            }
+
+            db.People.Where(p => p.PersonId == personId).FirstOrDefault().IsUser = true;
+            db.SaveChanges();
+            return db.People.Where(p => p.IsUser).FirstOrDefault().PersonId;
         }
     }
 }
