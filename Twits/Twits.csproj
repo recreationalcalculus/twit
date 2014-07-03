@@ -127,8 +127,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\Adapters\FollowerAdapter.cs" />
     <Compile Include="Adapters\Adapters\PersonAdapter.cs" />
     <Compile Include="Adapters\Adapters\TweetAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IFollower.cs" />
     <Compile Include="Adapters\Interfaces\IPerson.cs" />
     <Compile Include="Adapters\Interfaces\ITweet.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

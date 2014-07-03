@@ -37,5 +37,11 @@ namespace Twits.Controllers
             }
 
         }
+
+        public IHttpActionResult Delete(int deleterId, int tweetId)
+        {
+            _tweetAdapter.DeleteTweet(deleterId, tweetId);
+            return Ok();
+        }
     }
 }
