@@ -32,6 +32,7 @@ namespace Twits.Adapters.Adapters
                         Body = t.Body,
                         AuthorId = t.Twit.PersonId,
                         AuthorName = t.Twit.Name,
+                        Visible = t.Visible
                     }).ToList(),
 
                 FollowerIds = db.Follows.Where(f => f.FolloweeId == p.PersonId).Select(f => f.FollowerId).ToList()

@@ -529,7 +529,9 @@
     <Content Include="TwitApp\blank.html" />
     <Content Include="TwitApp\error.html" />
     <Content Include="TwitApp\images\404.jpg" />
+    <Content Include="TwitApp\images\logo.svg" />
     <Content Include="TwitApp\Index.html" />
+    <Content Include="TwitApp\scripts\Utilities.js" />
     <Content Include="TwitApp\Twit.html" />
     <Content Include="TwitApp\scripts\index.js" />
     <Content Include="TwitApp\Tweets.html" />
