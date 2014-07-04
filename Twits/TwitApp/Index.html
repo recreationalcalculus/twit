@@ -34,19 +34,18 @@
             <div id="following-box" class="container" ng-show="$root.loggedIn">
                 <div class="well">
                     <h1>Following</h1>
-                    <!--<input type="text" class="form-control" ng-model="searchPerson" placeholder="Search" /><br />
-                    <div ng-show="showLoading"><span class="glyphicon glyphicon-refresh fa-spin" ng-hide="loading"></span> Loading...</div>
+                    <input type="text" class="form-control" ng-model="searchFollowers" placeholder="Search" /><br />
                     <ul class="personList">
-                        <li ng-repeat="person in Followers | filter : searchPerson : person['Name']">
+                        <li ng-repeat="person in Followers | filter : searchFollowers : person['Name']">
                             <div class="PersonTile btn btn-default" ng-click="go(person['Id'])">
-                                <img src="{{person[img]}}">
+                                <img src="{{person['ImgUrl']}}">
                                 <div class="PersonTileInnerText">
                                     <p>{{person["Name"]}}</p>
                                     <p><small>(ID: {{person["Id"]}})</small></p>
                                 </div>
                             </div>
                         </li>
-                    </ul>-->
+                    </ul>
                 </div>
             </div>
         </div>
@@ -64,11 +63,10 @@
                     <h1>Twits</h1>
                     <input type="text" class="form-control" ng-model="searchPerson" placeholder="Search" /><br />
                     <div ng-show="showLoading"><span class="glyphicon glyphicon-refresh fa-spin" ng-hide="loading"></span> Loading...</div>
-                    <!--{{people[0]["Name"]}}-->
                     <ul class="personList">
                         <li ng-repeat="person in people | filter : searchPerson : person['Name']">
                             <div class="PersonTile btn btn-default" ng-click="go(person['Id'])">
-                                <img src="{{person[img]}}">
+                                <img src="{{person['ImgUrl']}}">
                                 <div class="PersonTileInnerText">
                                     <p>{{person["Name"]}}</p>
                                     <p><small>(ID: {{person["Id"]}})</small></p>

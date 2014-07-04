@@ -2,10 +2,10 @@
 
 Utilities.ValidateLogin = function () {
     var name = document.getElementById('logName').value;
-    console.log('logName=' + name + ' typeof logName=' + typeof name);
+    //console.log('logName=' + name + ' typeof logName=' + typeof name);
 
     var id = document.getElementById('idNumber').value;
-    console.log('id=' + id + ' typeof id=' + typeof id);
+    //console.log('id=' + id + ' typeof id=' + typeof id);
 
     if (name && parseInt(id))  {
         document.getElementById('loginButton').disabled = false;

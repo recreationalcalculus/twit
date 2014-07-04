@@ -32,9 +32,24 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
         $log.info($scope.idNumber);
         $http.get('/api/twit/' + $scope.idNumber)
         .success(function (data, status) {
-            $rootScope.user = data;
-            $log.info(data);
-            if (data['Name'].toLowerCase() == $scope.logName.toLowerCase()) { $rootScope.loggedIn = true; }
+            if (data['Name'].toLowerCase() == $scope.logName.toLowerCase()) {
+                $rootScope.user = data;
+                $log.info(data);
+                var followers = [];
+                for (var id in $rootScope.user['FollowerIds']) {
+                    $log.info(id);
+                    $http.get('/api/twit/' + $rootScope.user['FollowerIds'][id])
+                    .success(function (follower, status) {
+                        followers.push(follower);
+                        $log.info($scope.Followers);
+                    })
+                    .error(function () {
+                        $log.error('Connection Error');
+                    })
+                }
+                $scope.Followers = followers;
+                $rootScope.loggedIn = true;
+            }
             else { $location.path('/notfound'); }
         })
         .error(function (data, status) {
@@ -83,10 +98,10 @@ Twit.controller('TwitTweetController', function ($scope, $log, $http, $location,
     $http.get('/api/twit/' + $routeParams.Id)
     .success(function (data, status) {
         $scope.twit = data;
-        $log.info(data);
-        for (tweet in data.Tweets) {
-            $log.info(data.Tweets);
-        }
+        //populate Followers panel
+
+
+        //switch to tweet panel & reveal follower panel
         $scope.showLoading = false;
     })
     .error(function (data, status) {
@@ -97,7 +112,6 @@ Twit.controller('TwitTweetController', function ($scope, $log, $http, $location,
 /*
 Twit.controller('Followers', function ($scope, $http, $rootScope, $log) {
     $scope.Followers = [];
-    $scope
     for (var id in $rootScope.user['FollowerIds']) {
         $http.get('/api/twit/' + id)
         .success(function (data, status) {
