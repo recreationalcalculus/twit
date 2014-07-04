@@ -54,11 +54,11 @@
                     <!--{{people[0]["Name"]}}-->
                     <ul class="personList">
                         <li ng-repeat="person in people | filter : searchPerson : person['Name']">
-                            <div class="PersonTile btn btn-default">
+                            <div class="PersonTile btn btn-default" ng-click="go(person['Id'])">
                                 <img src="{{person[img]}}">
                                 <div class="PersonTileInnerText">
                                     <p>{{person["Name"]}}</p>
-                                    <p></p><small>(ID: {{person["Id"]}})</small></p>
+                                    <p><small>(ID: {{person["Id"]}})</small></p>
                                 </div>
                             </div>
                         </li>

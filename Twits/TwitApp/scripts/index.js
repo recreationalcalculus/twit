@@ -1,4 +1,28 @@
-﻿var Twit = angular.module('Twit', []);
+﻿var Twit = angular.module('Twit', ['ngRoute']);
+
+Twit.config(function ($routeProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'blank.html'
+    })
+    .when('/Twit/:Id', {
+        templateUrl: 'Twit.html',
+        caseInsensitiveMatch: true,
+        controller: 'TwitController'
+    })
+    .when('/Twit/:Id/Tweets', {
+        templateUrl: 'TwitTweets.html',
+        caseInsensitiveMatch: true,
+        controller: 'TwitTweetController'
+    })
+    .when('/notfound', {
+        templateUrl: 'error.html',
+        caseInsensitiveMatch: true
+    })
+    .otherwise({
+        redirectTo: '/notfound'
+    });
+});
 
 Twit.controller('LoginTweet', function ($scope) {
     $scope.loggedIn = false;
@@ -9,15 +33,35 @@ Twit.controller('LoginTweet', function ($scope) {
     }
 });
 
-Twit.controller('People', function ($scope, $http) {
+Twit.controller('People', function ($scope, $location, $http) {
     $scope.showLoading = true;
     $scope.img = "ImgUrl";
     $http({ method: 'GET', url: '/api/twit' })
     .success(function (data, status) {
         $scope.people = data;
-        //console.log('before: $scope.loading=' + $scope.loading);
         $scope.showLoading = false;
-        //console.log('after: $scope.loading=' + $scope.loading);
+        
     });
- 
+
+    $scope.go = function (id) {
+        $location.path('twit/' + id);
+    }
+
+});
+
+Twit.controller('TwitController', function ($scope, $http, $location, $routeParams) {
+    $scope.showLoading = true;
+    $http.get('/api/twit/' + $routeParams.Id)
+    .success(function (data, status) {
+        $scope.twit = data;
+        $scope.showLoading = false;
+    })
+    .error(function (data, status) {
+        $location.path('/notfound');
+    });
+});
+
+Twit.controller('TwitTweetController', function ($scope, $http, $location, $routeParams) {
+
+
 });

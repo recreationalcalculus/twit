@@ -32,7 +32,7 @@ namespace Twits.Controllers
                 PersonVM person = _personAdapter.GetPerson(id);
                 if (person == null)
                 {
-                    return Redirect("/TwitApp/error404.html");
+                    return Redirect(new Uri("../TwitApp/error.html", UriKind.Relative));
                 }
                 else
                 {

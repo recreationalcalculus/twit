@@ -526,10 +526,13 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="TwitApp\error404.html" />
+    <Content Include="TwitApp\blank.html" />
+    <Content Include="TwitApp\error.html" />
     <Content Include="TwitApp\images\404.jpg" />
     <Content Include="TwitApp\Index.html" />
+    <Content Include="TwitApp\Twit.html" />
     <Content Include="TwitApp\scripts\index.js" />
+    <Content Include="TwitApp\Tweets.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

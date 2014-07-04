@@ -78,3 +78,16 @@ div.PersonTileInnerText > small {
 #twitWell {
     width:23em;
 }
+
+div.profile > img {
+    width:15em;
+    height:15em;
+    border: .15em solid black;
+    border-radius:.5em;
+    float:left;
+}
+
+div.profile > div.textBlock {
+    float:left;
+    margin-left:2em;
+}
