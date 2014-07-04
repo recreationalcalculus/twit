@@ -91,3 +91,32 @@ div.profile > div.textBlock {
     float:left;
     margin-left:2em;
 }
+
+.tweetList {
+    list-style-type:none;
+    padding:0;
+}
+.tweetList  img {
+    width:3em;
+    height:3em;
+    border-radius:.45em;
+    float:left;
+}
+
+.tweetList .TweetTileInnerText {
+    float:left;
+    position:relative;
+    top:-1.5em;
+    margin-left:.5em;
+}
+
+.tweetList h1, .tweetList small {
+    font-size:8pt;
+}
+
+.tweetList p {
+}
+
+.TweetTile {
+    clear:left;
+}

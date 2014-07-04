@@ -59,9 +59,20 @@ Twit.controller('TwitController', function ($scope, $http, $location, $routePara
     .error(function (data, status) {
         $location.path('/notfound');
     });
+
+    $scope.tweets = function () {
+        $location.path('/Twit/'+$scope.twit.Id+'/Tweets')
+    }
 });
 
 Twit.controller('TwitTweetController', function ($scope, $http, $location, $routeParams) {
-
-
+    $scope.showLoading = true;
+    $http.get('/api/twit/' + $routeParams.Id)
+    .success(function (data, status) {
+        $scope.twit = data;
+        $scope.showLoading = false;
+    })
+    .error(function (data, status) {
+        $location.path('/notfound');
+    });
 });
