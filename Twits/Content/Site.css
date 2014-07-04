@@ -19,6 +19,62 @@ textarea {
 #login > .well, #tweet > .well {
     height:23em;
     width:20em;
-    margin:auto;
+    float:right;
     margin-bottom:2em;
+}
+
+#following-box > .well {
+    width:20em;
+    float:right;
+}
+
+#people > well {
+
+}
+
+ul.personList {
+    list-style-type:none;
+    padding:0;
+}
+
+ul.personList img {
+    height:5em;
+    width:5em;
+    border-radius:.25em;
+    float:left;
+    margin-right:1em;
+}
+
+/*ul.personList p {
+    float:left;
+    font-size:16pt;
+}*/
+
+div.PersonTile {
+    width:20em;
+    overflow-x:hidden;
+    margin-bottom:1em;
+}
+
+div.PersonTile > small {
+    float:left;
+    clear:left;
+}
+
+div.PersonTileInnerText {
+    text-align:left;
+    float:left;
+}
+
+div.PersonTileInnerText > p {
+    font-size:16pt;
+    margin-bottom:0em;
+}
+
+div.PersonTileInnerText > small {
+    font-size:10pt;
+}
+
+#twitWell {
+    width:23em;
 }

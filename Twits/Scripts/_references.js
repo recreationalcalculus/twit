@@ -14,3 +14,4 @@
 /// <reference path="angular-cookies.min.js" />
 /// <reference path="angular-animate.min.js" />
 /// <reference path="angular.min.js" />
+/// <reference path="htmlwrappers.js" />
