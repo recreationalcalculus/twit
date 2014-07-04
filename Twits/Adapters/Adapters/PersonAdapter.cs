@@ -24,7 +24,7 @@ namespace Twits.Adapters.Adapters
 
                 AboutMe = p.AboutMe,
 
-                Tweets = p.Tweets.Select(
+                Tweets = p.Tweets.Where(t => t.Visible).Select(
                     t => new TweetVM
                     {
                         Id = t.TweetId,

@@ -21,14 +21,14 @@ namespace Twits.Controllers
         {
             if (id == -1)
             {
-                return Redirect("/TwitApp/error404.html");
+                return Redirect(new Uri("../TwitApp/error.html",UriKind.Relative));
             }
             else
             {
                 TweetVM tweet = _tweetAdapter.GetTweet(id);
                 if (tweet == null)
                 {
-                    return Redirect("/TwitApp/error404.html");
+                    return Redirect(new Uri("../TwitApp/error.html", UriKind.Relative));
                 }
                 else
                 {
