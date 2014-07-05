@@ -13,5 +13,6 @@ namespace Twits.Models
         public string AboutMe { get; set; }
         public List<TweetVM> Tweets { get; set; }
         public List<int> FollowerIds { get; set; }
+        public List<int> FollowingIds { get; set; }
     }
 }

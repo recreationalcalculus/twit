@@ -35,7 +35,9 @@ namespace Twits.Adapters.Adapters
                         Visible = t.Visible
                     }).ToList(),
 
-                FollowerIds = db.Follows.Where(f => f.FolloweeId == p.PersonId).Select(f => f.FollowerId).ToList()
+                FollowerIds = db.Follows.Where(f => f.FolloweeId == p.PersonId).Select(f => f.FollowerId).ToList(),
+                
+                FollowingIds = db.Follows.Where(f => f.FollowerId == p.PersonId).Select(f => f.FolloweeId).ToList()
 
             }).FirstOrDefault();
         }

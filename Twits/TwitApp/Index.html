@@ -36,7 +36,7 @@
                     <h1>Following</h1>
                     <input type="text" class="form-control" ng-model="searchFollowers" placeholder="Search" /><br />
                     <ul class="personList">
-                        <li ng-repeat="person in Followers | filter : searchFollowers : person['Name']">
+                        <li ng-repeat="person in Following | filter : searchFollowers : person['Name']">
                             <div class="PersonTile btn btn-default" ng-click="go(person['Id'])">
                                 <img src="{{person['ImgUrl']}}">
                                 <div class="PersonTileInnerText">

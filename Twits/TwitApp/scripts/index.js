@@ -30,24 +30,32 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
 
     $scope.Login = function () {
         $log.info($scope.idNumber);
+        //check to see if there is an id matching what was entered
         $http.get('/api/twit/' + $scope.idNumber)
         .success(function (data, status) {
+            //if the id matches, check that the right name was entered too
             if (data['Name'].toLowerCase() == $scope.logName.toLowerCase()) {
+                //set global user to point at the person who just logged in
                 $rootScope.user = data;
                 $log.info(data);
-                var followers = [];
-                for (var id in $rootScope.user['FollowerIds']) {
+                //create array for followers
+                var following = [];
+                //loop through the FollowerIds array and load each one into the followers array
+                for (var id in $rootScope.user['FollowingIds']) {
                     $log.info(id);
-                    $http.get('/api/twit/' + $rootScope.user['FollowerIds'][id])
+                    $http.get('/api/twit/' + $rootScope.user['FollowingIds'][id])
                     .success(function (follower, status) {
-                        followers.push(follower);
-                        $log.info($scope.Followers);
+                        following.push(follower);
+                        $log.info($scope.following);
                     })
                     .error(function () {
                         $log.error('Connection Error');
                     })
                 }
-                $scope.Followers = followers;
+                // populate the Following panel
+                $scope.Following = following;
+
+                // show the Following panel and tweet panel
                 $rootScope.loggedIn = true;
             }
             else { $location.path('/notfound'); }
