@@ -62,9 +62,12 @@
                 <div class="well" id="twitWell">
                     <h1>Twits</h1>
                     <input type="text" class="form-control" ng-model="searchPerson" placeholder="Search" /><br />
+                    <div ng-show="$root.user">
+                        <input type="checkbox" ng-model="justFollowers" /> Only show followers.
+                    </div><br />
                     <div ng-show="showLoading"><span class="glyphicon glyphicon-refresh fa-spin" ng-hide="loading"></span> Loading...</div>
                     <ul class="personList">
-                        <li ng-repeat="person in people | filter : searchPerson : person['Name']">
+                        <li ng-repeat="person in people | filter : searchPerson : person['Name']" ng-show="isFollower(person['Id'])">
                             <div class="PersonTile btn btn-default" ng-click="go(person['Id'])">
                                 <img src="{{person['ImgUrl']}}">
                                 <div class="PersonTileInnerText">

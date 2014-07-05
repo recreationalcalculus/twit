@@ -101,7 +101,7 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
     }
 });
 
-Twit.controller('People', function ($scope, $location, $http) {
+Twit.controller('People', function ($scope, $location, $http, $log, $rootScope) {
     $scope.showLoading = true;
     $scope.img = "ImgUrl";
     $http({ method: 'GET', url: '/api/twit' })
@@ -115,6 +115,17 @@ Twit.controller('People', function ($scope, $location, $http) {
         $location.path('twit/' + id);
     }
 
+    //filter out twits that aren't followers of current logged-in user
+    $scope.isFollower = function (id) {
+        if ($scope.justFollowers) {
+            $log.info("Twit Id " + id);
+            return $rootScope.user.FollowerIds.indexOf(id) > -1;
+        }
+
+        else {
+            return true;
+        }
+    }
 });
 
 Twit.controller('TwitController', function ($scope, $http, $location, $routeParams) {
