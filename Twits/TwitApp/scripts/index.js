@@ -1,4 +1,37 @@
-﻿var Twit = angular.module('Twit', ['ngRoute']);
+﻿var Twit = angular.module('Twit', ['ngRoute'])
+.service('GetService', function ($http) {
+    this.Twits = function (IdArray) {
+        var twits = [];
+        //loop through the IdArray array and load each one into the twits array
+        for (var id in IdArray) {
+            $http.get('/api/twit/' + IdArray[id])
+            .success(function (twit, status) {
+                twits.push(twit);
+            })
+            .error(function () {
+                $log.error('Connection Error');
+            })
+        }
+
+        return twits;
+    }
+
+    this.Tweets = function (IdArray) {
+        var tweets = [];
+        //loop through the IdArray array and load each one into the tweets array
+        for (var id in IdArray) {
+            $http.get('/api/tweet/' + IdArray[id])
+            .success(function (tweet, status) {
+                tweets.push(tweet);
+            })
+            .error(function () {
+                $log.error('Connection Error');
+            })
+        }
+
+        return tweets;
+    }
+})
 
 Twit.config(function ($routeProvider) {
     $routeProvider
@@ -29,6 +62,7 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
     $scope.user = 'Anonymous';
 
     $scope.Login = function () {
+
         $log.info($scope.idNumber);
         //check to see if there is an id matching what was entered
         $http.get('/api/twit/' + $scope.idNumber)
@@ -117,19 +151,3 @@ Twit.controller('TwitTweetController', function ($scope, $log, $http, $location,
     });
 });
 
-/*
-Twit.controller('Followers', function ($scope, $http, $rootScope, $log) {
-    $scope.Followers = [];
-    for (var id in $rootScope.user['FollowerIds']) {
-        $http.get('/api/twit/' + id)
-        .success(function (data, status) {
-            $scope.Followers.push(data);
-            $log.info($scope.Followers);
-        })
-        .error(function () {
-            $log.error('Connection Error');
-        })
-    }
-
-});
-*/
