@@ -1,25 +1,29 @@
 ﻿var Twit = angular.module('Twit', ['ngRoute'])
-.service('GetService', function ($http) {
-    this.Twits = function (IdArray) {
-        var twits = [];
+.service('GetService', function ($http, $log) {
+    this.TweetsByTwits = function (IdArray, tweets) {
+
         //loop through the IdArray array and load each one into the twits array
         for (var id in IdArray) {
             $http.get('/api/twit/' + IdArray[id])
             .success(function (twit, status) {
-                twits.push(twit);
+                $log.info('GET twit:');
+                $log.info(twit);
+                tweets.concat(twit.Tweets);
             })
             .error(function () {
                 $log.error('Connection Error');
             })
         }
 
-        return twits;
+        return tweets;
     }
 
     this.Tweets = function (IdArray) {
+        $log.info('Tweets was called with IdArray=' + IdArray)
         var tweets = [];
         //loop through the IdArray array and load each one into the tweets array
         for (var id in IdArray) {
+            $log.info('id=' + id + ' IdArray=' + IdArray);
             $http.get('/api/tweet/' + IdArray[id])
             .success(function (tweet, status) {
                 tweets.push(tweet);
@@ -47,6 +51,11 @@ Twit.config(function ($routeProvider) {
         templateUrl: 'TwitTweets.html',
         caseInsensitiveMatch: true,
         controller: 'TwitTweetController'
+    })
+    .when('/Tweets', {
+        templateUrl: 'Tweets.html',
+        caseInsensitiveMatch: true,
+        controller: 'TweetController'
     })
     .when('/notfound', {
         templateUrl: 'error.html',
@@ -91,6 +100,9 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
 
                 // show the Following panel and tweet panel
                 $rootScope.loggedIn = true;
+
+                // Load tweets
+                $location.path('/tweets');
             }
             else { $location.path('/notfound'); }
         })
@@ -160,5 +172,35 @@ Twit.controller('TwitTweetController', function ($scope, $log, $http, $location,
     .error(function (data, status) {
         $location.path('/notfound');
     });
+});
+
+Twit.controller('TweetController', function ($rootScope, $location, $scope, $log, $http) {
+    if ($rootScope.user) {
+        var twitIds = [$rootScope.user['Id']].concat($rootScope.user['FollowingIds']);
+
+        var TweetObj = function (tweet, img) {
+            this.Tweet = tweet;
+            this.Image = img;
+        }
+
+        $scope.Tweets = [];
+
+        for (var id in twitIds) {
+            $http.get('/api/twit/' + twitIds[id])
+                .success(function (twit) {
+                    if (twit) {
+                        for (var t in twit.Tweets) {
+                            $scope.Tweets.push(new TweetObj(twit.Tweets[t], twit.ImgUrl));
+                        }
+                    }
+                })
+                .error($log.error('Connection Error'));
+        }
+    }
+
+    else {
+        $location.path('/');
+    }
+
 });
 
