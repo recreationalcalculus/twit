@@ -1,2 +1,15 @@
 ﻿<h1>Tweets</h1>
-{{Tweets}}
+<input type="text" class="form-control" ng-model="searchTweets" placeholder="Search" /><br />
+<div ng-show="showLoading"><span class="glyphicon glyphicon-refresh fa-spin" ng-hide="loading"></span> Loading...</div>
+<ul class="tweetList">
+    <li ng-repeat="tweetObj in Tweets | filter : searchTweets : tweetObj['Tweet'] | orderBy : tweetObj['Tweet']['Timestamp']">
+        <blockquote class="TweetTile container">
+            <img src="{{tweetObj['Image']}}">
+            <div class="TweetTileInnerText">
+                <h1>{{tweetObj['Tweet']['AuthorName']}} (ID: {{tweetObj['Tweet']['AuthorId']}}) said: </h1>
+                <p>{{tweetObj['Tweet']['Body']}}</p>
+                <p><small>{{getTimestampString(tweetObj['Tweet']['Timestamp'])}}</small></p>
+            </div>
+        </blockquote>
+    </li>
+</ul>
