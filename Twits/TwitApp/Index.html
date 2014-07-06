@@ -25,13 +25,13 @@
                 <div id="tweet" ng-show="$root.loggedIn" class="container">
                     <div class="well">
                         <p>Posting As: {{$root.user['Name']}} (ID# {{$root.user['Id']}})</p>
-                        <textarea id="tweetText" class="form-control" ng-model="tweet" rows="3" cols="20" placeholder="Tweet! Tweet!"></textarea>
+                        <textarea id="tweetText" class="form-control" ng-model="tweet" rows="3" cols="20" placeholder="Tweet! Tweet!" onkeyup="Utilities.ValidateTweet()"></textarea>
                         <input type="button" class="btn btn-success form-control" ng-click="Tweet()" value="Post" />
                         <div class="form-group">
                             <div class="btn-group btn-group-justified form-group">
                                 <div class="btn btn-default" ng-click="Home()"><span class="glyphicon glyphicon-home"></span>&nbsp; Home</div>
-                                <div class="btn btn-primary" ng-click="Profile()"><span class="glyphicon glyphicon-user"></span>&nbsp; Profile</div>
-                                <div class="btn btn-warning" ng-click="Logout()"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Logout</div>
+                                <div class="btn btn-default" ng-click="Profile()"><span class="glyphicon glyphicon-user"></span>&nbsp; Profile</div>
+                                <div class="btn btn-default" ng-click="Logout()"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Logout</div>
                             </div>
                         </div>
                         

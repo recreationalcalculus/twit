@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Twits.Areas.HelpPage.ModelDescriptions;
-using Twits.Areas.HelpPage.Models;
+using $rootnamespace$.Areas.HelpPage.ModelDescriptions;
+using $rootnamespace$.Areas.HelpPage.Models;
 
-namespace Twits.Areas.HelpPage
+namespace $rootnamespace$.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

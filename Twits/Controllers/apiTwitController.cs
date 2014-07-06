@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Twit.Data;
 using Twit.Data.Models;
 using Twits.Adapters.Adapters;
@@ -12,6 +13,7 @@ using Twits.Models;
 
 namespace Twits.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class apiTwitController : ApiController
     {
         private IPerson _personAdapter;
@@ -42,6 +44,7 @@ namespace Twits.Controllers
 
         }
 
+        [HttpPost]
         public IHttpActionResult Post(string body, int id)
         {
             int tweetId = _tweetAdapter.CreateTweet(id, body);

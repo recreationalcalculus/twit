@@ -14,6 +14,8 @@ namespace Twits
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/plain"));
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
+            // Enable cors
+            config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
             

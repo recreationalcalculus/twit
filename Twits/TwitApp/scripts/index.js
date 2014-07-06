@@ -137,6 +137,20 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
         $rootScope.user = null;
         $location.path('/');
     }
+
+    $scope.Tweet = function () {
+        $http({
+            method: 'POST',
+            url: '/api/Twit/' + $rootScope.user.Id,
+            data: { body: $scope.tweet }
+        })
+            .success(function () {
+
+            })
+            .error(function () {
+
+            });
+    }
 });
 
 Twit.controller('People', function ($scope, $location, $http, $log, $rootScope) {
