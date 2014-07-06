@@ -7,13 +7,15 @@
         <ul class="tweetList">
             <li ng-repeat="tweet in twit['Tweets'] | filter : searchTweets : tweet['Body']">
                 <blockquote class="TweetTile container">
-                    <img src="{{twit['ImgUrl']}}">
-                    <div class="TweetTileInnerText">
-                        <h1>{{twit['Name']}} (ID: {{twit['Id']}}) said: </h1>
-                        <p>{{tweet['Body']}}</p>
-                        <p><small>{{tweet['Timestamp']}} </small></p>
-                    </div>
-                </blockquote>
+                    <a href="#/twit/{{twit['Id']}}">
+                        <img src="{{twit['ImgUrl']}}">
+                    </a>
+                        <div class="TweetTileInnerText">
+                            <h1><a href="#/twit/{{twit['Id']}}">{{twit['Name']}} (ID: {{twit['Id']}}) said: </a></h1>
+                            <p>{{tweet['Body']}}</p>
+                            <p><small><a href="#/tweet/{{tweet['Id']}}">{{tweet['Timestamp']}} </a></small></p>
+                        </div>
+</blockquote>
             </li>
         </ul>
     </div>

@@ -4,11 +4,11 @@
 <ul class="tweetList">
     <li ng-repeat="tweetObj in Tweets | filter : searchTweets : tweetObj['Tweet'] | orderBy : tweetObj['Tweet']['Timestamp']">
         <blockquote class="TweetTile container">
-            <img src="{{tweetObj['Image']}}">
+            <a href="#/twit/{{tweetObj['Tweet']['AuthorId']}}"><img src="{{tweetObj['Image']}}"></a>
             <div class="TweetTileInnerText">
-                <h1>{{tweetObj['Tweet']['AuthorName']}} (ID: {{tweetObj['Tweet']['AuthorId']}}) said: </h1>
+                <h1><a href="#/twit/{{tweetObj['Tweet']['AuthorId']}}">{{tweetObj['Tweet']['AuthorName']}} (ID: {{tweetObj['Tweet']['AuthorId']}}) said: </a></h1>
                 <p>{{tweetObj['Tweet']['Body']}}</p>
-                <p><small>{{getTimestampString(tweetObj['Tweet']['Timestamp'])}}</small></p>
+                <p><small><a href="#/tweet/{{tweetObj['Tweet']['Id']}}">{{getTimestampString(tweetObj['Tweet']['Timestamp'])}}</a></small></p>
             </div>
         </blockquote>
     </li>

@@ -55,6 +55,11 @@ Twit.config(function ($routeProvider) {
     .when('/Tweets', {
         templateUrl: 'Tweets.html',
         caseInsensitiveMatch: true,
+        controller: 'TweetsController'
+    })
+    .when('/Tweet/:Id', {
+        templateUrl: 'Tweet.html',
+        caseInsensitiveMatch: true,
         controller: 'TweetController'
     })
     .when('/notfound', {
@@ -100,6 +105,10 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
 
                 // show the Following panel and tweet panel
                 $rootScope.loggedIn = true;
+                $scope.logName = '';
+                $scope.idNumber = '';
+                document.getElementById('loginButton').disabled = true;
+
 
                 // Load tweets
                 $location.path('/tweets');
@@ -110,6 +119,23 @@ Twit.controller('LoginTweet', function ($scope, $http, $location, $rootScope, $l
             $location.path('/notfound');
         })
 
+    }
+
+    $scope.Home = function () {
+        console.log('Home() called');
+        $location.path('/tweets');
+    }
+
+    $scope.Profile = function () {
+        console.log('Profile() called');
+        $location.path('/twit/' + $rootScope.user['Id']);
+    }
+
+    $scope.Logout = function () {
+        console.log('Logout() called');
+        $rootScope.loggedIn = false;
+        $rootScope.user = null;
+        $location.path('/');
     }
 });
 
@@ -174,7 +200,7 @@ Twit.controller('TwitTweetController', function ($scope, $log, $http, $location,
     });
 });
 
-Twit.controller('TweetController', function ($rootScope, $location, $scope, $log, $http) {
+Twit.controller('TweetsController', function ($rootScope, $location, $scope, $log, $http) {
     if ($rootScope.user) {
         var twitIds = [$rootScope.user['Id']].concat($rootScope.user['FollowingIds']);
 
@@ -202,7 +228,7 @@ Twit.controller('TweetController', function ($rootScope, $location, $scope, $log
         $location.path('/');
     }
 
-    $scope.getTimestampString = function(str) {
+    $scope.getTimestampString = function (str) {
         $log.info('getTimestampString called with str = ' + str);
         var date = new Date(str);
         var days = Math.round(((new Date()) - date) / 86400000, 0);
@@ -215,9 +241,42 @@ Twit.controller('TweetController', function ($rootScope, $location, $scope, $log
         else if (days > 1) {
             returnString += ' (' + days + ' days ago)';
         }
-        
+
         return returnString;
     }
 
+});
+
+Twit.controller('TweetController', function ($http, $routeParams, $location, $log, $scope) {
+
+    $http.get('/api/tweet/' + $routeParams.Id)
+        .success(function (tweet, status) {
+            $http.get('/api/twit/' + tweet['AuthorId'])
+                .success(function (twit, status) {
+                    $scope.TweetObj = { Tweet: tweet, Image: twit.ImgUrl };
+                })
+                .error(function () { $log.error('tweet twit not found'); });
+
+        })
+        .error(function () {
+            $location.path('/notfound');
+        });
+
+    $scope.getTimestampString = function (str) {
+        $log.info('getTimestampString called with str = ' + str);
+        var date = new Date(str);
+        var days = Math.round(((new Date()) - date) / 86400000, 0);
+        returnString = date.toLocaleTimeString();
+
+        if (days == 1) {
+            returnString += ' (yesterday)';
+        }
+
+        else if (days > 1) {
+            returnString += ' (' + days + ' days ago)';
+        }
+
+        return returnString;
+    }
 });
 

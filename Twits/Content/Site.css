@@ -1,6 +1,29 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image:url('/TwitApp/images/logo.svg');
+    background-position:center;
+    background-position-y:15em;
+    background-repeat:no-repeat;
+}
+
+a {
+    text-decoration:none;
+    color:inherit;
+}
+
+a:hover {
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+a:visited {
+    color:inherit;
+}
+
+small {
+    color:GrayText;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -124,3 +147,53 @@ div.profile > div.textBlock {
 .blank {
     text-align:center;
 }
+
+div.showSingleTweet {
+   position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(255,255,255,1);
+    z-index: 10;
+}
+
+div.showSingleTweet > blockquote {
+    position:absolute;
+    top:2em;
+    left:2em;
+    padding:1em;
+    overflow:auto;
+}
+
+div.showSingleTweet > blockquote img {
+    float: left;
+    border-radius:.5em;
+    height:6em;
+    width: 6em;
+}
+
+div.showSingleTweet > blockquote  div.TweetTileInnerText {
+    float: left;
+    margin-left: 1em;
+    position: relative;
+    top:-1.5em;
+}
+
+div.showSingleTweet > blockquote  div.TweetTileInnerText  h1 {
+    font-size: 10pt;
+}
+
+div.showSingleTweet > blockquote  div.TweetTileInnerText > p {
+    font-size: 14pt;
+}
+
+div.showSingleTweet > blockquote  div.TweetTileInnerText > p > small {
+    font-size: 10pt;
+}
+
+#center {
+    height:100%;
+    overflow-y:auto;
+}
+

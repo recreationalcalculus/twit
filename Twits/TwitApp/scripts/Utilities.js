@@ -59,3 +59,20 @@ Utilities.GetTweetHTML = function(twitImgUrl,tweet) {
 
     */
 }
+
+Utilities.getTimestampString = function (str) {
+    $log.info('getTimestampString called with str = ' + str);
+    var date = new Date(str);
+    var days = Math.round(((new Date()) - date) / 86400000, 0);
+    returnString = date.toLocaleTimeString();
+
+    if (days == 1) {
+        returnString += ' (yesterday)';
+    }
+
+    else if (days > 1) {
+        returnString += ' (' + days + ' days ago)';
+    }
+
+    return returnString;
+}

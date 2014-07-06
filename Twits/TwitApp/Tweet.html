@@ -1,0 +1,10 @@
+﻿<div class="showSingleTweet">
+    <blockquote class="TweetTile container">
+        <a href="#/twit/{{TweetObj['Tweet']['AuthorId']}}"><img src="{{TweetObj['Image']}}"></a>
+        <div class="TweetTileInnerText">
+            <h1><a href="#/twit/{{TweetObj['Tweet']['AuthorId']}}">{{TweetObj['Tweet']['AuthorName']}} (ID: {{TweetObj['Tweet']['AuthorId']}}) said: </a></h1>
+            <p>{{TweetObj['Tweet']['Body']}}</p>
+            <p><small>{{getTimestampString(TweetObj['Tweet']['Timestamp'])}}</small></p>
+        </div>
+    </blockquote>
+</div>
